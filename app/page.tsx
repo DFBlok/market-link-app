@@ -14,10 +14,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Building2 className="h-8 w-8 text-blue-600 mr-3" />
-              <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">B2B Marketplace</h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Connect. Source. Grow.</p>
+             
+              <div className="flex items-center space-x-3">
+                <img src="MarketLink.svg" alt="market link" className="w-16 h-auto object-contain"  />
+                <h1 className="text-xl font-bold text-gray-900">Market Link</h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Collaborate & Grow Together</p>
+                
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -55,7 +57,7 @@ export default function HomePage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            Connect with Trusted <span className="text-blue-600">Business Partners</span>
+            Connect with Trusted <span className="text-red-600">Business Partners</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
             The premier B2B marketplace connecting manufacturers with suppliers across South Africa. Streamline your
@@ -183,8 +185,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <Building2 className="h-8 w-8 text-blue-400 mr-3" />
-                <span className="text-xl font-bold">B2B Marketplace</span>
+                <img src="MarketLink.svg" alt="market link" className="w-16 h-auto object-contain"  />                
+                <span className="text-xl pl-4 font-bold">Market Link</span> 
+
               </div>
               <p className="text-gray-400">Connecting manufacturers with trusted suppliers across South Africa.</p>
             </div>
