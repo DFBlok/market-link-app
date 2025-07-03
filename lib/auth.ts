@@ -22,7 +22,7 @@ export async function createUser(
   email: string,
   password: string,
   userType: "manufacturer" | "supplier",
-  role: 'user'|"admin"
+  role: 'user'
 ): Promise<User> {
   const hashedPassword = await hashPassword(password)
 

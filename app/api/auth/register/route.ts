@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "User with this email already exists" }, { status: 409 })
     }
 
+    const role = 'user' // Default role for new users
     const user = await createUser(name, email, password, userType, "user")
 
     return NextResponse.json(
