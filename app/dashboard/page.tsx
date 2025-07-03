@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -36,6 +36,30 @@ import { productSchema, inquiryResponseSchema, type ProductInput, type InquiryRe
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+//**************************************IMPORTS
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+const mockMetrics = [
+  { label: "Products", value: 42 },
+  { label: "Orders", value: 18 },
+  { label: "Revenue", value: "R12,500" },
+  { label: "Avg Rating", value: "4.2★" },
+];
+
+const chartData = [
+  { name: "Week 1", Orders: 4 },
+  { name: "Week 2", Orders: 7 },
+  { name: "Week 3", Orders: 3 },
+  { name: "Week 4", Orders: 4 },
+];
+const supplierId = 13;
+
+
+//**************************************INTERFACES
 interface User {
   id: number
   name: string
@@ -44,6 +68,8 @@ interface User {
 }
 
 interface Product {
+  status: string
+  stock: ReactNode
   id: number
   name: string
   description: string
@@ -112,6 +138,7 @@ export default function DashboardPage() {
   const [isResponseDialogOpen, setIsResponseDialogOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null)
+  const [showDialog, setShowDialog] = useState(false)
   const router = useRouter()
 
   const productForm = useForm<ProductInput>({
@@ -818,6 +845,52 @@ export default function DashboardPage() {
           </DialogContent>
         </Dialog>
       </div>
+      {/*  New dashboards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-6 space-y-6">
+      <h1 className="text-2xl font-bold">Supplier Dashboard</h1>
+
+       {/* Order Management Section */}
+      <div className="space-y-8">
+        <CreateOrderForm supplierId={supplierId}/>
+        </div>
+
+       <Orders supplierId={13} />
+      {/* Metrics */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {mockMetrics.map((metric, i) => (
+          <Card key={i} className="text-center">
+            <CardContent className="py-6">
+              <p className="text-sm text-muted-foreground mb-1">{metric.label}</p>
+              <p className="text-xl font-semibold">{metric.value}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Orders Chart */}
+      <div className="bg-white dark:bg-background rounded-xl p-4 shadow">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-medium">Orders This Month</h2>
+          <Badge variant="secondary">July</Badge>
+        </div>
+        <ResponsiveContainer width="100%" height={250}>
+          <BarChart data={chartData}>
+            <XAxis dataKey="name" />
+            <YAxis allowDecimals={false} />
+            <Tooltip />
+            <Bar dataKey="Orders" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+
+      
+
+      
+    </div>
     </div>
   )
 }
+import Orders from "@/app/dashboard/components/order"
+import CreateOrderForm from "./components/CreateOrderForm"
