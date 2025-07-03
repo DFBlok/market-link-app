@@ -34,13 +34,13 @@ export default function HomePage() {
                   Register
                 </Button>
               </Link>
-              <Link href="/supplier-dashboard">
+              <Link href="https://kzmit7oiuz5ufm44a5iy.lite.vusercontent.net/">
                 <Button size="sm">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Supplier
                 </Button>
               </Link>
-              <Link href="/manufacturer-dashboard">
+              <Link href="https://kzmpmvym6j2gh97h3hbb.lite.vusercontent.net/">
                 <Button size="sm">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Manufacturer
