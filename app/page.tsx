@@ -40,6 +40,12 @@ export default function HomePage() {
                   Supplier
                 </Button>
               </Link>
+              <Link href="/manufacturer-dashboard">
+                <Button size="sm">
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Manufacturer
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
