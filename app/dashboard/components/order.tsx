@@ -17,6 +17,32 @@ export default function SupplierOrders({ supplierId }: { supplierId: number }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+  async function fetchOrders() {
+    try {
+      const res = await fetch(`/api/orders?supplierId=${supplierId}`);
+
+if (!res.ok) {
+  const text = await res.text();
+  console.error(`Fetch error: Status ${res.status} - ${text || 'No response body'}`);
+  setOrders([]);
+  setLoading(false);
+  return;
+}
+
+      const data = await res.json();
+      setOrders(data);
+    } catch (err) {
+      console.error('Error fetching orders:', err);
+      setOrders([]); // or set an error state
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  fetchOrders();
+}, [supplierId]);
+
+/*   useEffect(() => {
     async function fetchOrders() {
       const res = await fetch(`/api/orders?supplierId=${supplierId}`);
       const data = await res.json();
@@ -24,7 +50,7 @@ export default function SupplierOrders({ supplierId }: { supplierId: number }) {
       setLoading(false);
     }
     fetchOrders();
-  }, [supplierId]);
+  }, [supplierId]); */
 
   if (loading) return <div>Loading...</div>;
   if (!orders.length) return <div>No orders found.</div>;
