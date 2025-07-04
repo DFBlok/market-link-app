@@ -43,7 +43,7 @@ export default function HomePage() {
                   Resource
                 </Button>
               </Link>
-              <Link href="https://kzmpmvym6j2gh97h3hbb.lite.vusercontent.net/">
+              <Link href="https://kzmgthirulqpakkizn8y.lite.vusercontent.net/">
                 <Button size="sm">
                   <UserPlus className="h-4 w-4 mr-2" />
                   Manufacturer
