@@ -3,8 +3,9 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Building2, Factory, Truck, Users, ArrowRight, LogIn, UserPlus } from "lucide-react"
+import { Building2, Factory, Truck, Users, ArrowRight, LogIn, UserPlus, Home } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import ResourceCenter from "@/components/resource-center"
 
 export default function HomePage() {
   return (
@@ -36,10 +37,10 @@ export default function HomePage() {
                   Register
                 </Button>
               </Link>
-              <Link href="https://kzmit7oiuz5ufm44a5iy.lite.vusercontent.net/">
-                <Button size="sm">
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Supplier
+              <Link href="https://v0-business-registration-ten.vercel.app/">
+                <Button size="sm" className="bg-green-500" >
+                  <Home className="h-4 w-4 mr-2" />
+                  Resource
                 </Button>
               </Link>
               <Link href="https://kzmpmvym6j2gh97h3hbb.lite.vusercontent.net/">
