@@ -446,12 +446,29 @@ export default function DashboardPage() {
           </Card>
         </div>
 
+         {/* Orders Chart */}
+      <div className="bg-white dark:bg-background rounded-xl p-4 mb-5 shadow">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-medium">Orders This Month</h2>
+          <Badge variant="secondary">July</Badge>
+        </div>
+        <ResponsiveContainer width="100%" height={250}>
+          <BarChart data={chartData}>
+            <XAxis dataKey="name" />
+            <YAxis allowDecimals={false} />
+            <Tooltip />
+            <Bar dataKey="Orders" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
         {/* Main Content */}
         {user.userType === "supplier" ? (
           <Tabs defaultValue="products" className="space-y-6">
             <TabsList>
               <TabsTrigger value="products">Product Catalog</TabsTrigger>
               <TabsTrigger value="inquiries">Manufacturer Inquiries</TabsTrigger>
+              <TabsTrigger value="Orders">Supplier Orders</TabsTrigger>             
             </TabsList>
 
             <TabsContent value="products" className="space-y-6">
@@ -662,7 +679,7 @@ export default function DashboardPage() {
                           {inquiry.status === "pending" && (
                             <Button size="sm" onClick={() => handleRespondToInquiry(inquiry)}>
                               <Reply className="h-4 w-4 mr-2" />
-                              Respond
+                              Respond 
                             </Button>
                           )}
                         </div>
@@ -681,6 +698,15 @@ export default function DashboardPage() {
                   </div>
                 )}
               </div>
+            </TabsContent>
+
+            <TabsContent value="Orders" className="space-y-9">
+              <h3>Supplier Orders </h3>
+              <div className="text-center py-12">
+                <CreateOrderForm supplierId={supplierId}/>
+                
+              </div>
+              <Orders supplierId={13} />
             </TabsContent>
           </Tabs>
         ) : (
@@ -714,6 +740,7 @@ export default function DashboardPage() {
                       <p className="text-sm text-muted-foreground">3 days ago</p>
                     </div>
                   </div>
+                  {/* <insetBar /> */}
                 </div>
               </CardContent>
             </Card>
@@ -850,12 +877,9 @@ export default function DashboardPage() {
         <div className="p-6 space-y-6">
       <h1 className="text-2xl font-bold">Supplier Dashboard</h1>
 
-       {/* Order Management Section */}
-      <div className="space-y-8">
-        <CreateOrderForm supplierId={supplierId}/>
-        </div>
+       
 
-       <Orders supplierId={13} />
+       
       {/* Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {mockMetrics.map((metric, i) => (
@@ -868,21 +892,7 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Orders Chart */}
-      <div className="bg-white dark:bg-background rounded-xl p-4 shadow">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-medium">Orders This Month</h2>
-          <Badge variant="secondary">July</Badge>
-        </div>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={chartData}>
-            <XAxis dataKey="name" />
-            <YAxis allowDecimals={false} />
-            <Tooltip />
-            <Bar dataKey="Orders" fill="#4f46e5" radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+     
     </div>
 
       

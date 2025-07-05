@@ -10,6 +10,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // ✅ Check if buyer exists
+    const buyerResult = await sql`SELECT id FROM users WHERE id = ${buyerId}`;
+    if (buyerResult.rowCount === 0) {
+      return NextResponse.json({ error: `Buyer with ID ${buyerId} does not exist` }, { status: 400 });
+    }
+
+    // ✅ Check if supplier exists (optional but good practice)
+    const supplierResult = await sql`SELECT id FROM users WHERE id = ${supplierId}`;
+    if (supplierResult.rowCount === 0) {
+      return NextResponse.json({ error: `Supplier with ID ${supplierId} does not exist` }, { status: 400 });
+    }
+
     // 1. Create the order
     const orderResult = await sql`
       INSERT INTO orders (supplier_id, buyer_id, order_date, shipping_address)
