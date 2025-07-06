@@ -35,7 +35,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { productSchema, inquiryResponseSchema, type ProductInput, type InquiryResponseInput } from "@/lib/validations"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
+import SupplierDashboard from "@/app/dashboard/supplier/page"
+import Orders from "@/app/dashboard/components/order"
+import CreateOrderForm from "./components/CreateOrderForm"
 //**************************************IMPORTS
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -447,7 +449,7 @@ export default function DashboardPage() {
         </div>
 
          {/* Orders Chart */}
-      <div className="bg-white dark:bg-background rounded-xl p-4 mb-5 shadow">
+{/*       <div className="bg-white dark:bg-background rounded-xl p-4 mb-5 shadow">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-lg font-medium">Orders This Month</h2>
           <Badge variant="secondary">July</Badge>
@@ -460,7 +462,7 @@ export default function DashboardPage() {
             <Bar dataKey="Orders" fill="#4f46e5" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-      </div>
+      </div> */}
 
         {/* Main Content */}
         {user.userType === "supplier" ? (
@@ -468,7 +470,8 @@ export default function DashboardPage() {
             <TabsList>
               <TabsTrigger value="products">Product Catalog</TabsTrigger>
               <TabsTrigger value="inquiries">Manufacturer Inquiries</TabsTrigger>
-              <TabsTrigger value="Orders">Supplier Orders</TabsTrigger>             
+              <TabsTrigger value="Orders">Supplier Orders</TabsTrigger> 
+              <TabsTrigger value="mainDashboard">Main Dashboard</TabsTrigger>            
             </TabsList>
 
             <TabsContent value="products" className="space-y-6">
@@ -705,8 +708,11 @@ export default function DashboardPage() {
               <div className="text-center py-12">
                 <CreateOrderForm supplierId={supplierId}/>
                 
-              </div>
-              <Orders supplierId={13} />
+              </div><Orders supplierId={13} />
+            </TabsContent>
+
+            <TabsContent value="mainDashboard" className="space-y-6">
+                <SupplierDashboard />
             </TabsContent>
           </Tabs>
         ) : (
@@ -744,10 +750,49 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        )}
+            
+              <CardHeader>
+                <CardTitle>Supplier Ratings</CardTitle>
+                <CardDescription>Recent ratings and reviews from manufacturers</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Supplier</TableHead>
+                      <TableHead>Rating</TableHead>
+                      <TableHead>Review</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>SteelCorp Manufacturing</TableCell>
+                      <TableCell className="text-yellow-500">4.5 ★</TableCell>
+                      <TableCell>Great quality steel sheets, fast delivery!</TableCell>
+                      <TableCell>2024-01-10</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Precision Tools Ltd</TableCell>
+                      <TableCell className="text-yellow-500">4.8 ★</TableCell>
+                      <TableCell>Excellent service and product quality.</TableCell>
+                      <TableCell>2024-01-08</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
 
+                {inquiries.length === 0 && (
+                  <div className="text-center py-12">
+                    <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No inquiries yet</h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Suppliers will send inquiries about your products here.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
         {/* View Inquiry Dialog */}
+        
         <Dialog open={isInquiryDialogOpen} onOpenChange={setIsInquiryDialogOpen}>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
@@ -815,6 +860,11 @@ export default function DashboardPage() {
           </DialogContent>
         </Dialog>
 
+          </div>
+        )}
+
+
+
         {/* Response Dialog */}
         <Dialog open={isResponseDialogOpen} onOpenChange={setIsResponseDialogOpen}>
           <DialogContent className="sm:max-w-[600px]">
@@ -872,35 +922,12 @@ export default function DashboardPage() {
           </DialogContent>
         </Dialog>
       </div>
-      {/*  New dashboards */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Supplier Dashboard</h1>
+     
 
-       
-
-       
-      {/* Metrics */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {mockMetrics.map((metric, i) => (
-          <Card key={i} className="text-center">
-            <CardContent className="py-6">
-              <p className="text-sm text-muted-foreground mb-1">{metric.label}</p>
-              <p className="text-xl font-semibold">{metric.value}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      
 
      
     </div>
-
-      
-
-      
-    </div>
-    </div>
   )
 }
-import Orders from "@/app/dashboard/components/order"
-import CreateOrderForm from "./components/CreateOrderForm"
+

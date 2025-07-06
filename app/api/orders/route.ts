@@ -16,6 +16,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: `Buyer with ID ${buyerId} does not exist` }, { status: 400 });
     }
 
+    
+
     // ✅ Check if supplier exists (optional but good practice)
     const supplierResult = await sql`SELECT id FROM users WHERE id = ${supplierId}`;
     if (supplierResult.rowCount === 0) {
