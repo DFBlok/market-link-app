@@ -44,6 +44,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recha
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ManufacturerDashboard from "./manufacturer/page"
 
 const mockMetrics = [
   { label: "Products", value: 42 },
@@ -466,6 +467,7 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         {user.userType === "supplier" ? (
+          
           <Tabs defaultValue="products" className="space-y-6">
             <TabsList>
               <TabsTrigger value="products">Product Catalog</TabsTrigger>
@@ -718,6 +720,7 @@ export default function DashboardPage() {
         ) : (
           // Manufacturer Dashboard
           <div className="space-y-6">
+            <ManufacturerDashboard />
             <Card>
               <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
