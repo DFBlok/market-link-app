@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/sonner"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "B2B Marketplace",
+  title: "Market Link",
   description: "Connect manufacturers with trusted suppliers",
     generator: 'v0.dev'
 }
